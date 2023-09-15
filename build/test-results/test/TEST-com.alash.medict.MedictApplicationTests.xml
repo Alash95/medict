@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.alash.medict.MedictApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-15T14:17:26" hostname="IACADEMY-LOLA" time="1.174">
+<testsuite name="com.alash.medict.MedictApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-09-15T16:58:24" hostname="IACADEMY-LOLA" time="1.784">
   <properties/>
-  <testcase name="contextLoads()" classname="com.alash.medict.MedictApplicationTests" time="1.174"/>
-  <system-out><![CDATA[15:17:15.644 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.alash.medict.MedictApplicationTests]: MedictApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-15:17:15.802 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.alash.medict.MedictApplication for test class com.alash.medict.MedictApplicationTests
+  <testcase name="contextLoads()" classname="com.alash.medict.MedictApplicationTests" time="1.784"/>
+  <system-out><![CDATA[17:58:04.913 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.alash.medict.MedictApplicationTests]: MedictApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:58:05.148 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.alash.medict.MedictApplication for test class com.alash.medict.MedictApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,7 +13,7 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.1.2)
 
-2023-09-15T15:17:16.402+01:00  WARN 19512 --- [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+2023-09-15T17:58:05.984+01:00  WARN 20380 --- [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -22,31 +22,31 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-2023-09-15T15:17:16.421+01:00  INFO 19512 --- [    Test worker] c.alash.medict.MedictApplicationTests    : Starting MedictApplicationTests using Java 20 with PID 19512 (started by Oyinlola.Alasoluyi in C:\Users\oyinlola.alasoluyi\Documents\IntelliJ\medict)
-2023-09-15T15:17:16.423+01:00  INFO 19512 --- [    Test worker] c.alash.medict.MedictApplicationTests    : No active profile set, falling back to 1 default profile: "default"
-2023-09-15T15:17:17.678+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-09-15T15:17:17.681+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-09-15T15:17:17.878+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 187 ms. Found 3 JPA repository interfaces.
-2023-09-15T15:17:17.903+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2023-09-15T15:17:17.905+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2023-09-15T15:17:17.928+01:00  INFO 19512 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.IUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2023-09-15T15:17:17.928+01:00  INFO 19512 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.IVerificationTokenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2023-09-15T15:17:17.929+01:00  INFO 19512 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
-2023-09-15T15:17:17.929+01:00  INFO 19512 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
-2023-09-15T15:17:18.978+01:00  INFO 19512 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-09-15T15:17:19.093+01:00  INFO 19512 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.6.Final
-2023-09-15T15:17:19.096+01:00  INFO 19512 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-2023-09-15T15:17:19.399+01:00  INFO 19512 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-15T15:17:19.742+01:00  INFO 19512 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2023-09-15T15:17:19.912+01:00  INFO 19512 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-09-15T15:17:20.708+01:00  INFO 19512 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ef089ce
-2023-09-15T15:17:20.712+01:00  INFO 19512 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-09-15T15:17:21.218+01:00  INFO 19512 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-2023-09-15T15:17:22.209+01:00  INFO 19512 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-09-15T15:17:22.523+01:00  INFO 19512 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-09-15T15:17:23.505+01:00  WARN 19512 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-09-15T15:17:24.870+01:00  INFO 19512 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@54c15e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d38758a, org.springframework.security.web.context.SecurityContextHolderFilter@16576a6, org.springframework.security.web.header.HeaderWriterFilter@b257072, org.springframework.web.filter.CorsFilter@4acae4c7, org.springframework.security.web.authentication.logout.LogoutFilter@23b62cc3, com.alash.medict.security.JwtRequestFilter@6c65a7fc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1dbe592f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a174e4b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1c7da28, org.springframework.security.web.session.SessionManagementFilter@2ce7d43, org.springframework.security.web.access.ExceptionTranslationFilter@7b7268db, org.springframework.security.web.access.intercept.AuthorizationFilter@27df4dcb]
-2023-09-15T15:17:26.209+01:00  INFO 19512 --- [    Test worker] c.alash.medict.MedictApplicationTests    : Started MedictApplicationTests in 10.178 seconds (process running for 12.202)
+2023-09-15T17:58:06.017+01:00  INFO 20380 --- [    Test worker] c.alash.medict.MedictApplicationTests    : Starting MedictApplicationTests using Java 20 with PID 20380 (started by Oyinlola.Alasoluyi in C:\Users\oyinlola.alasoluyi\Documents\IntelliJ\medict)
+2023-09-15T17:58:06.020+01:00  INFO 20380 --- [    Test worker] c.alash.medict.MedictApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2023-09-15T17:58:07.727+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-09-15T17:58:07.730+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-09-15T17:58:07.928+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 186 ms. Found 3 JPA repository interfaces.
+2023-09-15T17:58:07.953+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-09-15T17:58:07.956+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-09-15T17:58:07.980+01:00  INFO 20380 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.IUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-09-15T17:58:07.980+01:00  INFO 20380 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.IVerificationTokenRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-09-15T17:58:07.981+01:00  INFO 20380 --- [    Test worker] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.alash.medict.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-09-15T17:58:07.981+01:00  INFO 20380 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+2023-09-15T17:58:09.162+01:00  INFO 20380 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-09-15T17:58:09.304+01:00  INFO 20380 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.6.Final
+2023-09-15T17:58:09.309+01:00  INFO 20380 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-09-15T17:58:09.634+01:00  INFO 20380 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-15T17:58:09.884+01:00  INFO 20380 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-09-15T17:58:09.913+01:00  INFO 20380 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-09-15T17:58:13.969+01:00  INFO 20380 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3a12f3e7
+2023-09-15T17:58:13.972+01:00  INFO 20380 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-09-15T17:58:14.894+01:00  INFO 20380 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-09-15T17:58:15.724+01:00  INFO 20380 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-09-15T17:58:20.237+01:00  INFO 20380 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-09-15T17:58:21.162+01:00  WARN 20380 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-09-15T17:58:23.283+01:00  INFO 20380 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4d71476c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@125447a0, org.springframework.security.web.context.SecurityContextHolderFilter@61a369cf, org.springframework.security.web.header.HeaderWriterFilter@70c3c5d7, org.springframework.web.filter.CorsFilter@cede70a, org.springframework.security.web.authentication.logout.LogoutFilter@5e2abb58, com.alash.medict.security.JwtRequestFilter@39cf7f3c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@65bc50c9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@15844237, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6dc8a602, org.springframework.security.web.session.SessionManagementFilter@280cb0b4, org.springframework.security.web.access.ExceptionTranslationFilter@36e8fefe, org.springframework.security.web.access.intercept.AuthorizationFilter@48a2fb11]
+2023-09-15T17:58:24.226+01:00  INFO 20380 --- [    Test worker] c.alash.medict.MedictApplicationTests    : Started MedictApplicationTests in 18.739 seconds (process running for 21.29)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
