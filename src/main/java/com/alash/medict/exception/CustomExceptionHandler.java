@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.exception;
+package com.alash.medict.exception;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

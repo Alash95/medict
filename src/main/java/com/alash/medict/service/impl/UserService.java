@@ -1,6 +1,7 @@
-package com.alash.medict.service;
+package com.alash.medict.service.impl;
 
 
+import com.alash.medict.dto.request.ChangePasswordDTO;
 import com.alash.medict.dto.request.ResetPasswordDto;
 import com.alash.medict.dto.request.UserRequestDto;
 import com.alash.medict.dto.response.CustomResponse;
@@ -12,6 +13,8 @@ import com.alash.medict.model.VerificationToken;
 import com.alash.medict.repository.IUserRepository;
 import com.alash.medict.repository.IVerificationTokenRepository;
 import com.alash.medict.repository.RoleRepository;
+import com.alash.medict.service.IRoleService;
+import com.alash.medict.service.IUserService;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -41,7 +39,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -51,7 +49,7 @@ public class UserService implements IUserService{
     private final ApplicationEventPublisher publisher;
     private final HttpServletRequest servletRequest;
     private final RoleRepository roleRepository;
-//    private final RedisTemplate redisTemplate;
+    private final RedisTemplate redisTemplate;
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]+$";
     private static final Pattern pattern = Pattern.compile(EMAIL_REGEX);
 
@@ -61,7 +59,7 @@ public class UserService implements IUserService{
 
 
     @Override
-    public ResponseEntity<CustomResponse> getAllUsers() {
+    public ResponseEntity<CustomResponse> getAllUsers() { //TODO: add paginatio n
         List<User> users = userRepository.findAll();
         List<UserResponseDto> userResponseList = users.stream()
                 .map(user -> mapToUserResponse(user)).collect(Collectors.toList());
@@ -116,7 +114,8 @@ public class UserService implements IUserService{
                 .roles(Collections.singleton(role))
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-        userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
 
         // Publish
         publisher.publishEvent(new RegistrationCompletePublisher(newUser, applicationUrl(servletRequest)));
@@ -142,15 +141,17 @@ public class UserService implements IUserService{
 
         User user = userOpt.get();
         Integer token = theToken();
+        log.info("This is the reset password token " + token);
         emailService.sendResetPasswordEmail(token, user);
-        redisTemplate.opsForHash().put(PASSWORD_RESET,email,token);
-        redisTemplate.expire(PASSWORD_RESET, 5, TimeUnit.MINUTES);
+//        redisTemplate.opsForHash().put(PASSWORD_RESET,email,token);
+//        redisTemplate.expire(PASSWORD_RESET, 5, TimeUnit.MINUTES);
         return ResponseEntity.ok(new CustomResponse(HttpStatus.OK, "Kindly proceed to "+email+" to confirm your password reset"));
     }
 
     @Override
     public ResponseEntity<CustomResponse> confirmResetPassword(Integer token, ResetPasswordDto request) {
         Integer theToken = (Integer) redisTemplate.opsForHash().get(PASSWORD_RESET, request.getEmail());
+        log.info("this is the reset password token " + theToken);
         if(theToken != null && theToken.equals(token)){
 
             Long expirationTime = redisTemplate.getExpire(PASSWORD_RESET, TimeUnit.MINUTES);
@@ -361,96 +362,9 @@ public class UserService implements IUserService{
         return ResponseEntity.ok(new CustomResponse(HttpStatus.OK, "Password has been successfully changed"));
     }
 
-    @Override
-    public ResponseEntity<CustomResponse> addAddress(Long userId, UserAddressRequest request) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if(!userOpt.isPresent()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "User not found"));
-        }
 
-        if(request.getPhoneNumber()==null || request.getPhoneNumber().isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Phone number is required"));
-        }
-        if(request.getStreet()==null || request.getStreet().isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Street is required"));
-        }
-        if(request.getCity()==null || request.getCity().isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "City is required"));
-        }
-        if(request.getState()==null || request.getState().isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "State is required"));
-        }
-        if(request.getCountry()==null || request.getCountry().isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Country is required"));
-        }
 
-        User user = userOpt.get();
 
-        UserAddress address = UserAddress.builder()
-                .city(request.getCity())
-                .street(request.getStreet())
-                .phoneNumber(request.getPhoneNumber())
-                .user(user)
-                .state(request.getState())
-                .country(request.getCountry())
-                .build();
-        addressRepository.save(address);
-        return ResponseEntity.ok(new CustomResponse(HttpStatus.OK, "Successful"));
-    }
-
-    @Override
-    public ResponseEntity<CustomResponse> uploadProfilePicture(Long userId, MultipartFile file) throws IOException {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if(userOpt.isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "No user found"));
-        }
-        if(file.getSize() > 1048576){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Cannot upload file size that is more than 1mb"));
-        }
-
-        // Check the file extension
-        String originalFilename = file.getOriginalFilename();
-        String fileExtension = originalFilename.substring(originalFilename.lastIndexOf('.') + 1).toLowerCase();
-        List<String> supportedExtensions = Arrays.asList("jpg", "jpeg", "png", "gif");
-        if (!supportedExtensions.contains(fileExtension)) {
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Invalid image file format! Supported formats: JPG, JPEG, PNG, GIF"));
-        }
-        User user = userOpt.get();
-
-        String profileName = user.getFirstName()+"_avatar"+user.getId();
-        String fileName = profileName + "." + fileExtension;
-
-        BufferedImage bufferedImage = ImageIO.read(file.getInputStream());
-        if (bufferedImage == null) {
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Invalid image file!"));
-        }
-        String imagePath = IMAGE_FOLDER + fileName;
-        ProfileAvatar profileAvater = ProfileAvatar.builder()
-                .name(file.getOriginalFilename())
-                .type(file.getContentType())
-                .imagePath(imagePath)
-                .user(user)
-                .build();
-        profileRepository.save(profileAvater);
-        ImageIO.write(bufferedImage, fileExtension, new File(imagePath));
-        if(profileAvater!=null){
-            return ResponseEntity.ok(new CustomResponse(HttpStatus.OK, "Successfully uploaded profile picture"));
-        }
-        return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "Error occurred while uploading profile"));
-    }
-
-    @Override
-    public ResponseEntity<CustomResponse> fetchProfilePicture(Long userId) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if(userOpt.isEmpty()){
-            return ResponseEntity.badRequest().body(new CustomResponse(HttpStatus.BAD_REQUEST, "No user found"));
-        }
-        User user = userOpt.get();
-        ProfileAvatar avatar = profileRepository.findByUser(user).get();
-        ProfileAvatarResponse response = ProfileAvatarResponse.builder()
-                .imagePath(avatar.getImagePath()).build();
-        return ResponseEntity.ok(new CustomResponse(HttpStatus.OK.name(), response, "Successful"));
-    }
 
     public static boolean validateEmail(String email) {
         Matcher matcher = pattern.matcher(email);

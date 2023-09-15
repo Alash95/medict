@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.config;
+package com.alash.medict.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -11,13 +11,13 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
-                        name = "Peter",
-                        email = "depitaztech@gmail.com",
-                        url = "https://www.linkedin.com/in/peters-abraham-58161b247/"
+                        name = "Oyinlola",
+                        email = "oyinlolaalasho95@gmail.com",
+                        url = "https://www.linkedin.com/in/oyinlolaalasoluyi/"
 
                 ),
                 description = "OpenApi documentation for user management service",
-                title = "Central Estore Service",
+                title = "Medical Dictionary User Service",
                 version = "1.0"
         ),
         security = {

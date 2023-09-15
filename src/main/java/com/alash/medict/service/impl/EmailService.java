@@ -1,9 +1,10 @@
-package com.alash.medict.service;
+package com.alash.medict.service.impl;
 
 import com.alash.medict.model.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class EmailService {
     private final JavaMailSender mailSender;
     public void sendVerificationEmail(String url, User theUser) throws MessagingException, UnsupportedEncodingException {
         String subject = "Email Verification";
-        String senderName = "Central Estore Service";
+        String senderName = "Medict Service";
         String mailContent = "<p> Hi, "+ theUser.getUsername()+ ", </p>"+
                 "<p>Thank you for registering with us. "+"" +
                 "Please, follow the link below to complete your registration.</p>"+
@@ -24,16 +25,24 @@ public class EmailService {
                 "<p> Thank you. </P> <hr> <br> <b> Central Estore Service.</b>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
-        messageHelper.setFrom("depitaztech@gmail.com", senderName);
+        messageHelper.setFrom("oyinlolaalasho95@gmail.com", senderName);
         messageHelper.setTo(theUser.getEmail());
         messageHelper.setSubject(subject);
         messageHelper.setText(mailContent, true);
         mailSender.send(message);
+
+//        SimpleMailMessage message = new SimpleMailMessage();
+////        var messageHelper = new MimeMessageHelper(message);
+//        message.setFrom("depitaztech@gmail.com", senderName);
+//        messageHelper.setTo(theUser.getEmail());
+//        messageHelper.setSubject(subject);
+//        messageHelper.setText(mailContent, true);
+//        mailSender.send(message);
     }
 
     public void sendResetPasswordEmail(Integer token, User theUser) throws MessagingException, UnsupportedEncodingException {
         String subject = "Password Reset";
-        String senderName = "Central Estore Service";
+        String senderName = "Medict Service";
         String mailContent = "<p> Hi, "+ theUser.getUsername()+ ", </p>"+
                 "<p>Below is the token to reset your password. "+"" +
                 "If you did not initiate this request, kindly contact admin at <b>info@techiebros.come</b>.</p>"+
@@ -41,7 +50,7 @@ public class EmailService {
                 "<p> Thank you. </P> <hr> <br> <b> Central Estore Service.</b>";
         MimeMessage message = mailSender.createMimeMessage();
         var messageHelper = new MimeMessageHelper(message);
-        messageHelper.setFrom("depitaztech@gmail.com", senderName);
+        messageHelper.setFrom("oyinlolaalasho95@gmail.com", senderName);
         messageHelper.setTo(theUser.getEmail());
         messageHelper.setSubject(subject);
         messageHelper.setText(mailContent, true);

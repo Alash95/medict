@@ -1,7 +1,7 @@
-package com.peters.User_Registration_and_Email_Verification.security;
+package com.alash.medict.security;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
+import com.alash.medict.model.Role;
+import com.alash.medict.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,11 +18,11 @@ public class CustomUserDetails implements UserDetails {
     private List<GrantedAuthority> authorities;
     private boolean isEnabled;
 
-    public CustomUserDetails(UserEntity user) {
+    public CustomUserDetails(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.authorities = user.getRoles().stream()
-                .map(UserRole::getName)
+                .map(Role::getName)
                 .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
         this.isEnabled = user.isEnabled();
     }

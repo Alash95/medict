@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.security;
+package com.alash.medict.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class    JwtTokenUtil implements Serializable {
+public class JwtTokenUtil implements Serializable {
 
     private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 

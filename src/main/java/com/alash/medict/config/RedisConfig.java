@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.config;
+package com.alash.medict.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;

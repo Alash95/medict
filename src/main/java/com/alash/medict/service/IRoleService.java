@@ -1,15 +1,15 @@
-package com.peters.User_Registration_and_Email_Verification.user.service;
+package com.alash.medict.service;
 
-import com.peters.User_Registration_and_Email_Verification.user.dto.CustomResponse;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
-import com.peters.User_Registration_and_Email_Verification.user.dto.UserRoleRequestDto;
+
+import com.alash.medict.dto.request.UserRoleRequestDto;
+import com.alash.medict.dto.response.CustomResponse;
+import com.alash.medict.model.Role;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface IRoleService {
-    List<UserRole> getAllRoles();
+    List<Role> getAllRoles();
 
     ResponseEntity<CustomResponse> createRole(UserRoleRequestDto request);
 
@@ -17,7 +17,7 @@ public interface IRoleService {
 
     ResponseEntity<CustomResponse> findByName(String name);
 
-    UserRole findById(Long roleId);
+    Role findById(Long roleId);
 
     ResponseEntity<CustomResponse> removeUserFromRole(Long userId, Long roleId);
 

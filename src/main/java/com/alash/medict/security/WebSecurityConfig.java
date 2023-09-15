@@ -1,12 +1,14 @@
-package com.peters.User_Registration_and_Email_Verification.security;
+package com.alash.medict.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -40,31 +42,24 @@ public class WebSecurityConfig {
 
     private static final String[] CUSTOMER_SECURED_URL = {
             "/api/v1/auth/user/**",
-            "/api/v1/payment/**"
+        };
 
-    };
-
-    private static final String[] VENDOR_SECURED_URL = {
-            "/api/v1/product/**"
-
-    };
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-                .authorizeRequests(authorizeRequests -> authorizeRequests
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(UN_SECURED_URL).permitAll()
                         .requestMatchers(ADMIN_SECURED_URL).hasRole("ADMIN")
-                        .requestMatchers(VENDOR_SECURED_URL).hasRole("VENDOR")
                         .requestMatchers(CUSTOMER_SECURED_URL).hasRole("USER")
                         .anyRequest().hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                 )
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .and()
-                .csrf().disable()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .exceptionHandling((exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+
 
         return http.build();
     }

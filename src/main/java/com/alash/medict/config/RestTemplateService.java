@@ -1,6 +1,6 @@
-package com.peters.User_Registration_and_Email_Verification.config;
+package com.alash.medict.config;
 
-import com.peters.User_Registration_and_Email_Verification.user.dto.CustomResponse;
+import com.alash.medict.dto.response.CustomResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;

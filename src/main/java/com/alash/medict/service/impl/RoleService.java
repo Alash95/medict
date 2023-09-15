@@ -1,4 +1,4 @@
-package com.alash.medict.service;
+package com.alash.medict.service.impl;
 
 import com.alash.medict.dto.request.UserRoleRequestDto;
 import com.alash.medict.dto.response.CustomResponse;
@@ -10,6 +10,7 @@ import com.alash.medict.model.Role;
 import com.alash.medict.model.User;
 import com.alash.medict.repository.IUserRepository;
 import com.alash.medict.repository.RoleRepository;
+import com.alash.medict.service.IRoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class RoleService implements IRoleService{
+public class RoleService implements IRoleService {
     private final RoleRepository roleRepository;
     private final IUserRepository userRepository;
     @Override

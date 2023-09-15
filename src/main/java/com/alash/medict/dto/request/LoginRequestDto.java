@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.user.dto;
+package com.alash.medict.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.config;
+package com.alash.medict.config;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;

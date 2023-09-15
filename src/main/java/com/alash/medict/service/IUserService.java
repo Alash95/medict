@@ -1,7 +1,11 @@
-package com.peters.User_Registration_and_Email_Verification.user.service;
+package com.alash.medict.service;
 
-import com.peters.User_Registration_and_Email_Verification.user.dto.*;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
+
+import com.alash.medict.dto.request.ChangePasswordDTO;
+import com.alash.medict.dto.request.ResetPasswordDto;
+import com.alash.medict.dto.request.UserRequestDto;
+import com.alash.medict.dto.response.CustomResponse;
+import com.alash.medict.model.User;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,13 +22,12 @@ public interface IUserService {
 
     ResponseEntity<CustomResponse> fetchUserById(Long userId);
 
-    void saveVerificationToken(UserEntity theUser, String verificationToken);
+    void saveVerificationToken(User theUser, String verificationToken);
 
     ResponseEntity<CustomResponse> verifyEmail(String token);
 
     ResponseEntity<?> resendVerificationTokenEmail(String oldToken)throws MessagingException, UnsupportedEncodingException;
 
-    ResponseEntity<CustomResponse> addAddress(Long userId, UserAddressRequest request);
 
     ResponseEntity<CustomResponse> deleteProfile(Long userId);
 
@@ -32,9 +35,6 @@ public interface IUserService {
 
     ResponseEntity<CustomResponse> changePassword(ChangePasswordDTO request);
 
-    ResponseEntity<CustomResponse> uploadProfilePicture(Long userId, MultipartFile file) throws IOException;
-
-    ResponseEntity<CustomResponse> fetchProfilePicture(Long userId);
 
     ResponseEntity<CustomResponse>  resetPassword(String email) throws MessagingException, UnsupportedEncodingException;
 

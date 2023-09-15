@@ -1,14 +1,14 @@
-package com.peters.User_Registration_and_Email_Verification.user.repository;
+package com.alash.medict.repository;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
+import com.alash.medict.model.Role;
+import com.alash.medict.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface RoleRepository extends JpaRepository<UserRole, Long> {
-    Optional<UserRole> findByName(String name);
+public interface RoleRepository extends JpaRepository<Role, Long> {
+    Optional<Role> findByName(String name);
 
-    List<UserRole> findByUsers(UserEntity user);
+    List<Role> findByUsers(User user);
 }

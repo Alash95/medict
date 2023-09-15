@@ -1,23 +1,16 @@
-package com.peters.User_Registration_and_Email_Verification.event;
+package com.alash.medict.event;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
-import com.peters.User_Registration_and_Email_Verification.user.repository.IUserRepository;
-import com.peters.User_Registration_and_Email_Verification.user.repository.RoleRepository;
-import com.peters.User_Registration_and_Email_Verification.user.service.IUserService;
-import com.peters.User_Registration_and_Email_Verification.user.service.EmailService;
-import com.peters.User_Registration_and_Email_Verification.user.service.UserService;
+import com.alash.medict.model.User;
+import com.alash.medict.service.impl.EmailService;
+import com.alash.medict.service.IUserService;
+import com.alash.medict.service.impl.UserService;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
 import java.util.UUID;
 
 @Component
@@ -27,7 +20,7 @@ public class RegistrationCompletionEventListener implements ApplicationListener<
     private final IUserService userService;
 
 
-    private UserEntity theUser;
+    private User theUser;
     private final EmailService emailService;
 
 

@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.exception;
+package com.alash.medict.exception;
 
 public class ProductNotFoundException extends RuntimeException {
     public ProductNotFoundException(String message) {

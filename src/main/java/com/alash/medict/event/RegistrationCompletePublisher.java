@@ -1,17 +1,18 @@
-package com.peters.User_Registration_and_Email_Verification.event;
+package com.alash.medict.event;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import lombok.*;
+import com.alash.medict.model.User;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 
 @Getter
 @Setter
 public class RegistrationCompletePublisher extends ApplicationEvent {
 
-    private UserEntity user;
+    private User user;
     private String applicationUrl;
 
-    public RegistrationCompletePublisher(UserEntity user, String applicationUrl) {
+    public RegistrationCompletePublisher(User user, String applicationUrl) {
         super(user);
         this.user = user;
         this.applicationUrl = applicationUrl;

@@ -1,7 +1,7 @@
-package com.peters.User_Registration_and_Email_Verification.user.repository;
+package com.alash.medict.repository;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.VerificationToken;
+import com.alash.medict.model.User;
+import com.alash.medict.model.VerificationToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -10,5 +10,5 @@ public interface IVerificationTokenRepository extends JpaRepository<Verification
 
     Optional<VerificationToken> findByToken(String token);
 
-    Optional<VerificationToken> findByUser(UserEntity existingUser);
+    Optional<VerificationToken> findByUser(User existingUser);
 }

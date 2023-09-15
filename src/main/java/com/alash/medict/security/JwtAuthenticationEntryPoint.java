@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.security;
+package com.alash.medict.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,9 @@
-package com.peters.User_Registration_and_Email_Verification.user.dto;
+package com.alash.medict.dto.response;
 
+import com.alash.medict.model.Role;
+import com.alash.medict.model.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
-import lombok.AllArgsConstructor;
+    import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,8 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserResponseDto {
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String username;
     private String email;
-    private Set<UserRole> role;
+    private Set<Role> role;
     private boolean isEnabled;
 }

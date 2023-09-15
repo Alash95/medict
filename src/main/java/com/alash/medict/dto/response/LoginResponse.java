@@ -1,11 +1,10 @@
-package com.peters.User_Registration_and_Email_Verification.user.dto;
+package com.alash.medict.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 
 @Data
 @Builder
@@ -15,8 +14,7 @@ import org.hibernate.annotations.NaturalId;
 public class LoginResponse {
     private String access_token;
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String username;
     private String email;
     private boolean isEnabled;
 }

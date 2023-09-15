@@ -1,14 +1,11 @@
-package com.peters.User_Registration_and_Email_Verification.user.dto;
+package com.alash.medict.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
-
-import java.util.List;
 
 @Builder
 @Data

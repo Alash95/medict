@@ -1,2 +1,8 @@
-package com.alash.medict.dto.response;public class Sound {
+package com.alash.medict.dto.response;
+
+import lombok.Data;
+
+@Data
+public class Sound {
+    private String audio;
 }

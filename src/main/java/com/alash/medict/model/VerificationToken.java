@@ -1,4 +1,4 @@
-package com.peters.User_Registration_and_Email_Verification.user.entity;
+package com.alash.medict.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,11 +21,11 @@ public class VerificationToken {
     private String token;
     @OneToOne
     @JoinColumn(name = "user_id")
-    private UserEntity user;
+    private User user;
     private Date expirationTime;
     private static final int EXPIRATION_TIME = 1;
 
-    public VerificationToken(String token, UserEntity user) {
+    public VerificationToken(String token, User user) {
         super();
         this.token = token;
         this.user = user;

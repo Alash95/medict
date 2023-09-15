@@ -1,9 +1,9 @@
-package com.peters.User_Registration_and_Email_Verification.config;
+package com.alash.medict.config;
 
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
-import com.peters.User_Registration_and_Email_Verification.user.repository.IUserRepository;
-import com.peters.User_Registration_and_Email_Verification.user.repository.RoleRepository;
+import com.alash.medict.model.Role;
+import com.alash.medict.model.User;
+import com.alash.medict.repository.IUserRepository;
+import com.alash.medict.repository.RoleRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.util.Collections;
 
 
@@ -35,31 +32,30 @@ public class BeanConfig {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Bean
-    public CommandLineRunner createDefaultUser(PlatformTransactionManager transactionManager) {
-        return args -> {
-            TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
-
-            transactionTemplate.execute(status -> {
-                if (userRepository.findUserByEmail("admin@techiebros.com").isEmpty()) {
-                    UserRole role = roleRepository.findByName("ROLE_ADMIN").orElseThrow(() -> new IllegalStateException("ROLE_ADMIN not found"));
-
-                    UserEntity newUser = UserEntity.builder()
-                            .email("admin@techiebros.com")
-                            .firstName("Abraham")
-                            .lastName("Peter")
-                            .isEnabled(true)
-                            .roles(Collections.singleton(role))
-                            .password(passwordEncoder().encode("admin"))
-                            .build();
-
-                    entityManager.persist(role); // Save the UserRole entity
-                    userRepository.save(newUser); // Save the UserEntity entity
-                }
-                return null;
-            });
-        };
-    }
+//    @Bean
+//    public CommandLineRunner createDefaultUser(PlatformTransactionManager transactionManager) {
+//        return args -> {
+//            TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+//
+//            transactionTemplate.execute(status -> {
+//                if (userRepository.findUserByEmail("oyinlolaalasho95@gmail.com").isEmpty()) {
+//                    Role role = roleRepository.findByName("ROLE_ADMIN").orElseThrow(() -> new IllegalStateException("ROLE_ADMIN not found"));
+//
+//                    User newUser = User.builder()
+//                            .email("oyinlolaalasho95@gmail.com")
+//                            .username("Alash95")
+//                            .enabled(true)
+//                            .roles(Collections.singleton(role))
+//                            .password(passwordEncoder().encode("admin"))
+//                            .build();
+//
+//                    entityManager.persist(role); // Save the UserRole entity
+//                    userRepository.save(newUser); // Save the UserEntity entity
+//                }
+//                return null;
+//            });
+//        };
+//    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

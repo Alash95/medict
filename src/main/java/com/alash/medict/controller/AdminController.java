@@ -1,17 +1,11 @@
-package com.peters.User_Registration_and_Email_Verification.controller;
+package com.alash.medict.controller;
 
-import com.peters.User_Registration_and_Email_Verification.exception.ApplicationAuthenticationException;
-import com.peters.User_Registration_and_Email_Verification.exception.ProductNotFoundException;
-import com.peters.User_Registration_and_Email_Verification.product.dto.ProductCategoryRequest;
-import com.peters.User_Registration_and_Email_Verification.product.entity.ProductCategory;
-import com.peters.User_Registration_and_Email_Verification.product.service.ICategoryService;
-import com.peters.User_Registration_and_Email_Verification.user.dto.CustomResponse;
-import com.peters.User_Registration_and_Email_Verification.user.dto.UserResponseDto;
-import com.peters.User_Registration_and_Email_Verification.user.dto.UserRoleRequestDto;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserEntity;
-import com.peters.User_Registration_and_Email_Verification.user.entity.UserRole;
-import com.peters.User_Registration_and_Email_Verification.user.service.IRoleService;
-import com.peters.User_Registration_and_Email_Verification.user.service.IUserService;
+import com.alash.medict.dto.request.UserRoleRequestDto;
+import com.alash.medict.dto.response.CustomResponse;
+import com.alash.medict.dto.response.UserResponseDto;
+import com.alash.medict.model.Role;
+import com.alash.medict.service.IRoleService;
+import com.alash.medict.service.IUserService;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -29,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "admin")
 public class AdminController {
-    private final ICategoryService categoryService;
     private final IRoleService roleService;
     private final IUserService userService;
 
@@ -59,7 +52,7 @@ public class AdminController {
 
     @Hidden
     @GetMapping("/all-roles")
-    public ResponseEntity<List<UserRole>> getAllRoles(){
+    public ResponseEntity<List<Role>> getAllRoles(){
         return ResponseEntity.ok(roleService.getAllRoles());
     }
 
@@ -70,7 +63,7 @@ public class AdminController {
                     @ApiResponse(
                             responseCode = "200",
                             description = "Success",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserRole.class))
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Role.class))
                     ),
                     @ApiResponse(responseCode = "204",
                             description = "NO content",
@@ -105,32 +98,5 @@ public class AdminController {
     @DeleteMapping("/delete-role/{id}")
     public ResponseEntity<CustomResponse> deleteRole (@PathVariable("id") Long roleId){
         return roleService.deleteRole(roleId);
-    }
-
-
-    @GetMapping("/all-categories")
-    public ResponseEntity<List<ProductCategory>> getAllCategories(){
-        return ResponseEntity.ok(categoryService.getAllCategories());
-    }
-
-    @PostMapping("/create-category")
-    public ResponseEntity<ProductCategory> createCategory(@RequestBody ProductCategoryRequest request){
-        return ResponseEntity.ok(categoryService.createCategory(request));
-    }
-
-    @PostMapping("/remove-all-products-from-category/{id}")
-    public ProductCategory removeAllProductFromCategory(@PathVariable("id") Long categoryId){
-        return categoryService.removeAllProductFromCategory(categoryId);
-    }
-
-    @PostMapping("/remove-product-from-category")
-    public ResponseEntity<CustomResponse> removeSingleUserFromCategory(@RequestParam(name = "productId") Long productId, @RequestParam(name = "categoryId")Long categoryId){
-        return categoryService.removeProductFromCategory(productId, categoryId);
-    }
-
-
-    @DeleteMapping("/delete-category/{id}")
-    public void deleteCategory (@PathVariable("id") Long categoryId){
-        categoryService.deleteCategory(categoryId);
     }
 }
